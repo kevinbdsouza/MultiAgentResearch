@@ -32,6 +32,6 @@ def test_research_agent_sequence():
     result = agent.run("test query")
     assert result == "summary"
     assert brave.queries == ["topic one", "topic two"]
-    # first prompt for planning, second for summarization
-    assert len(gemini.prompts) == 2
+    # planning + subagent summaries + final summary
+    assert len(gemini.prompts) == 4
     assert "test query" in gemini.prompts[0]

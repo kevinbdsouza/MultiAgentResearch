@@ -15,10 +15,12 @@ source .venv/bin/activate
 uv pip install -e .[dev]
 ```
 
-Set the following environment variables with your API keys:
+Create a `.env` file and set your API keys:
 
-- `BRAVE_SEARCH_API_KEY`
-- `GEMINI_API_KEY`
+```bash
+BRAVE_SEARCH_API_KEY=your_brave_key
+GEMINI_API_KEY=your_gemini_key
+```
 
 ## Usage
 

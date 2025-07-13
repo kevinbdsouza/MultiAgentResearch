@@ -45,10 +45,22 @@ class ResearchAgent:
 
     # Execution ----------------------------------------------------------------
     def _run_subagent(self, subquery: str) -> str:
+        """Run a single search subagent and summarize the findings."""
         agent = SearchSubAgent(self.brave)
         results = agent.run(subquery)
-        snippets = "\n".join(r.get("description", "") for r in results)
-        return f"Results for '{subquery}':\n{snippets}"
+        items = []
+        for r in results:
+            title = r.get("title", "")
+            url = r.get("url", "")
+            desc = r.get("description", "")
+            items.append(f"- {title} ({url}): {desc}")
+        search_context = "\n".join(items)
+        prompt = (
+            f"Summarize the following search results for '{subquery}' "
+            "in 2-3 sentences and mention any useful URLs.\n" + search_context
+        )
+        summary = self.gemini.generate_content(prompt)
+        return summary
 
     def run(self, query: str) -> str:
         """Plan, delegate to subagents, and summarize results."""
