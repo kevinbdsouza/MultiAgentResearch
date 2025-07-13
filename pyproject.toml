@@ -1,0 +1,20 @@
+[project]
+name = "multi_agent_research"
+version = "0.1.0"
+description = "Sequential multi-agent web research system with Brave search and Gemini summarization."
+authors = [{name = "Example Author", email = "author@example.com"}]
+requires-python = ">=3.8"
+dependencies = [
+    "requests",
+    "python-dotenv",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "responses",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
