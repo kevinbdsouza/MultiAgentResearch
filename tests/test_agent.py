@@ -20,15 +20,18 @@ class DummyGemini:
 
     def generate_content(self, prompt: str) -> str:
         self.prompts.append(prompt)
+        if "independent search tasks" in prompt:
+            return "1. topic one\n2. topic two"
         return "summary"
 
 
 def test_research_agent_sequence():
     brave = DummyBrave()
     gemini = DummyGemini()
-    agent = ResearchAgent(brave, gemini)
+    agent = ResearchAgent(brave, gemini, num_subagents=2)
     result = agent.run("test query")
     assert result == "summary"
-    assert brave.queries == ["test query"]
-    assert len(gemini.prompts) == 1
+    assert brave.queries == ["topic one", "topic two"]
+    # first prompt for planning, second for summarization
+    assert len(gemini.prompts) == 2
     assert "test query" in gemini.prompts[0]

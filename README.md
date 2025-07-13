@@ -1,7 +1,8 @@
 # Multi Agent Research
 
-This project provides a sequential multi-agent web research system that uses
-Brave Search to gather information and Gemini to summarize the results.
+This project provides a simple multi-agent web research system. A lead Gemini
+agent decomposes the user query into subqueries, spawns Brave-powered search
+subagents, and then summarizes their findings.
 
 ## Setup
 
