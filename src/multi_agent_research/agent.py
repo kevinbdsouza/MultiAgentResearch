@@ -19,7 +19,7 @@ class CitationAgent:
         prompt = (
             "You are a citation assistant. Your task is to add citations to the following research report "
             "based on the provided sources. For each claim in the report, find the most relevant source "
-            "and add a citation in the format [Source #].\n\n"
+            "and add a citation in the format [#]. You should include the corresponding references at the bottom of the report. \n\n"
             f"Report:\n{report}\n\n"
             f"Sources:\n{sources}\n"
         )
@@ -70,7 +70,7 @@ class LeadAgent:
         prompt = (
             "You are a research assistant. Your goal is to break down the following research question into "
             f"{self.num_subagents} independent search tasks. For each task, provide a concise search query. "
-            "Return the queries as a numbered list.\n\n"
+            "Return the queries as a numbered list. Don't return anything else in the numbered list apart from the queries. \n\n"
             f"Research Question: {query}"
         )
         plan = self.gemini.generate_content(prompt)
